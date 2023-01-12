@@ -12,8 +12,19 @@ function Header({ title, description }) {
     </>
 }
 
-export default function Menu() {
+function Page({ children, title, description, className }) {
     return <div className={'h-screen page-background'}>
-        <Header title={'Menu'} description={'Whatever your diet or preferences, there’s enough choice for everyone.'} />
+        <Header title={title} description={description} />
+        <div className={className}>
+            {children}
+        </div>
     </div>
+}
+
+export default function Menu() {
+    return <Page title={'Menu'} description={'Whatever your diet or preferences, there’s enough choice for everyone.'}
+        className={'p-5'}
+    >
+        abc
+    </Page>
 }
