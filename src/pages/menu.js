@@ -1,30 +1,32 @@
-import Navbar from "../components/navbar";
+import Page from "../components/page";
+import hotChocolate from "../assets/images/products/hot-chocolate.png";
 
-function Header({ title, description }) {
-    return <>
-        <div className={'bg-gradient-to-b from-red-900 to-red-800 w-full'}>
-            <Navbar />
-            <div className={'h-56 p-10 flex flex-col justify-center'}>
-                <p className={'text-7xl mb-4 text-white font-title'}>{title}</p>
-                <p className={'text-2xl text-white font-subtitle'}>{description}</p>
-            </div>
-        </div>
-    </>
-}
-
-function Page({ children, title, description, className }) {
-    return <div className={'h-screen page-background'}>
-        <Header title={title} description={description} />
-        <div className={className}>
-            {children}
-        </div>
+function MenuItem() {
+    return <div className={'rounded-full h-32 w-32 bg-red-700 flex flex-col items-center mx-2 mb-16 select-none cursor-pointer transition-all duration-1000 hover:bg-gradient-radial from-red-700 to-red-800 group'}>
+        <img src={hotChocolate} alt={'hot chocolate'} className={'transition-all group-hover:scale-125'} />
+        <p className={'pt-2'}>Hot Chocolate</p>
     </div>
 }
 
 export default function Menu() {
-    return <Page title={'Menu'} description={'Whatever your diet or preferences, there’s enough choice for everyone.'}
+    return <Page
+        title={'Menu'}
+        description={'Whatever your diet or preferences, there’s enough choice for everyone.'}
         className={'p-5'}
     >
-        abc
+        <div className={'bg-white mx-52 p-5 flex flex-wrap justify-center'}>
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+        </div>
     </Page>
 }
