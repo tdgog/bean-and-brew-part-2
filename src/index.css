@@ -9,3 +9,10 @@
     @apply bg-wavy bg-repeat;
     background-size: 320px 320px;
 }
+
+.form-input-button {
+    @apply h-10 w-[70%] mt-2.5;
+    @apply bg-blue-500 hover:bg-blue-700 transition-all rounded;
+    @apply cursor-pointer;
+    @apply flex justify-center items-center text-white font-subtitle;
+}

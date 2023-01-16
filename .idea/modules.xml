@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../bean-and-brew-backend-new/.idea/bean-and-brew-backend-new.iml" filepath="$PROJECT_DIR$/../bean-and-brew-backend-new/.idea/bean-and-brew-backend-new.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/bean-and-brew-new.iml" filepath="$PROJECT_DIR$/.idea/bean-and-brew-new.iml" />
     </modules>
   </component>
