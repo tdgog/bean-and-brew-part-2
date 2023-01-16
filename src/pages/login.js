@@ -19,7 +19,7 @@ function TextDivider({children}) {
     </div>
 }
 
-export default function CreateAccount() {
+export default function LogIn() {
     const userContext = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -52,8 +52,8 @@ export default function CreateAccount() {
 
         </HalfScreen>
         <HalfScreen className={'p-5 py-36 flex items-center flex-col'}>
-            <h1 className={'text-4xl font-title font-bold'}>Create your Account</h1>
-            <h2 className={'text-xl font-subtitle text-neutral-600'}>Enter the fields below to get started</h2>
+            <h1 className={'text-4xl font-title font-bold'}>Welcome Back</h1>
+            <h2 className={'text-xl font-subtitle text-neutral-600'}>Enter the fields below to log into your account</h2>
             <TextDivider>OR</TextDivider>
             <TextField
                 id="outlined-basic"
@@ -77,14 +77,14 @@ export default function CreateAccount() {
             />
             <div
                 className={'form-input-button'}
-                onClick={() => userContext[1](email, password)}>
-                Create account
+                onClick={() => userContext[2](email, password)}>
+                Log in
             </div>
             <p className={'text-neutral-600 font-subtitle mt-2'}>
-                Already have an account? <span
+                Don't have an account? <span
                 className={'text-blue-500 font-bold cursor-pointer'}
-                onClick={() => navigate('/login')}>
-                    Log in
+                onClick={() => navigate('/create')}>
+                    Create account
                 </span>
             </p>
         </HalfScreen>
