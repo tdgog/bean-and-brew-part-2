@@ -14,7 +14,7 @@ export default function Menu() {
         description={'Whatever your diet or preferences, there’s enough choice for everyone.'}
         className={'p-5'}
     >
-        <div className={'bg-white mx-52 p-5 flex flex-wrap justify-center'}>
+        <div className={'bg-white mx-52 mt-20 p-5 flex flex-wrap justify-center'}>
             <MenuItem />
             <MenuItem />
             <MenuItem />

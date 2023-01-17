@@ -28,7 +28,7 @@ export default function CreateAccount() {
     function handleEmailUpdate(e) {
         setEmail(e.target.value);
 
-        if(!email.includes('@') || !email.includes('.')) {
+        if(email && (!email.includes('@') || !email.includes('.'))) {
             setEmailError('Invalid email');
         } else {
             setEmailError(null);
@@ -40,7 +40,7 @@ export default function CreateAccount() {
     function handlePasswordUpdate(e) {
         setPassword(e.target.value);
 
-        if(password.length < 8) {
+        if(password && password.length < 8) {
             setPasswordError('Password must be longer than 8 characters');
         } else {
             setPasswordError(null)

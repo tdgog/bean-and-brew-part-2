@@ -14,8 +14,8 @@ function Header({ title, description }) {
 
 export default function Page({ children, title, description, className }) {
     return <div className={'page-background'}>
-        <Header title={title} description={description} />
-        <div className={className}>
+        <div className={'h-screen w-screen'}>
+            <Header title={title} description={description} />
             {children}
         </div>
     </div>

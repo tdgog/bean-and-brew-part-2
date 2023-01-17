@@ -15,43 +15,35 @@ export default function UserManager({children}) {
         return new Promise((resolve, reject) => {
             bcrypt.genSalt(10, function(err, salt) {
                 bcrypt.hash(password, salt, function (err, hash) {
-                    resolve(hash);
+                    resolve([hash, salt]);
                 })
             })
         })
     }
 
-    function logIn(email, password) {
-        console.log(email, password)
-        fetch(`http://localhost:8000/isUnique`, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: email })
-        })
-            .then(response => response.json())
-            .then(async data => {
-                if (data.unique) return;
-                const hash = await generateHash(password);
-                console.log(email, hash)
-
-                fetch('http://localhost:8000/login', {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: email, hash: hash })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        cookie.set('login-token', data.token, { expires: new Date(data.expiry) })
-                    })
+    function sendAPIRequest(route, body) {
+        return new Promise((resolve, reject) => {
+            fetch(`http://localhost:8000/${route}`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
             })
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch(error => reject(error))
+        })
+    }
 
+    async function logIn(email, password) {
+        const isUnique = (await sendAPIRequest('isUnique', { email: email })).unique;
+        if(isUnique) return;
+
+        const salt = (await sendAPIRequest('getSalt', { email: email })).salt;
+        bcrypt.hash(password, salt, async function (err, hash) {
+            const loginInformation = await sendAPIRequest('login', { email: email, hash: hash });
+            cookie.set('login-token', loginInformation.token, { expires: new Date(loginInformation.expiry) })
+        })
     }
 
     function createUser(email, password) {
@@ -67,7 +59,7 @@ export default function UserManager({children}) {
             .then(async data => {
                 if (!data.unique) return;
 
-                const hash = await generateHash(password);
+                const [hash, salt] = await generateHash(password);
                 // Send email, hash, and salt to database
                 const requestOptions = {
                     method: 'POST',
@@ -75,7 +67,7 @@ export default function UserManager({children}) {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({email: email, hash: hash})
+                    body: JSON.stringify({email: email, hash: hash, salt: salt})
                 };
                 fetch(`http://localhost:8000/addUser`, requestOptions)
                     .then(response => response.json())

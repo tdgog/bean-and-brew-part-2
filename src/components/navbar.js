@@ -39,8 +39,8 @@ export default function Navbar({ homepage = false }) {
             <Navbutton to=''>Home</Navbutton>
             <Navbutton to='menu'>Menu</Navbutton>
             <Navbutton to='order'>Order online</Navbutton>
-            <Navbutton to=''>Lessons</Navbutton>
-            <Navbutton to=''>Baked goods hampers</Navbutton>
+            <Navbutton to='lessons'>Lessons</Navbutton>
+            <Navbutton to='hampers'>Baked goods hampers</Navbutton>
             <Navbutton to={user === null ? 'create' : 'account'}><UserIcon /></Navbutton>
         </div>
     </Bar>
